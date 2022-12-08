@@ -1,7 +1,7 @@
 package com.example.javaprojectv2.controller;
 
 import com.example.javaprojectv2.model.Customer;
-import com.example.javaprojectv2.service.CustomerService;
+import com.example.javaprojectv2.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,12 +13,12 @@ import java.util.Optional;
 public class CustomerController {
 
     @Autowired
-    CustomerService customerService;
+    CustomerRepository customerRepository;
 
 
     @PostMapping("/customers")
     public Customer saveCustomer(@RequestBody Customer customer) {
-        return customerService.saveCustomer(customer);
+        return customerRepository.save(customer);
     }
 
 /*    @PutMapping("/customers/{id}") /// yasbu
@@ -33,22 +33,42 @@ public class CustomerController {
         return customerRepository.save(customer);
     }*/
     @PutMapping("/customers")
-    public String updateCustomers(@RequestBody Customer customer) {
-       return customerService.updateCustomer(customer);
+    public String updateCustomer(@RequestBody Customer customer) {
+        boolean resourceFound =false;
+        for(Customer currentCustomer:getAllCustomer()){
+            if(currentCustomer.getId()==customer.getId()){
+                resourceFound=true;
+                currentCustomer.setName(customer.getName());
+                currentCustomer.setSurname(customer.getSurname());
+                currentCustomer.setUsername(customer.getUsername());
+                currentCustomer.setPassword(customer.getPassword());
+                currentCustomer.setRole(customer.getRole());
+            }
+            return "Customer Updated Succesfully";
+        }
+        return null;
     }
+
     @GetMapping("/customers")
     public List<Customer> getAllCustomer() {
-        return customerService.getAllCustomer();
+        List<Customer> customers = customerRepository.findAll();
+        return customers;
     }
     @GetMapping("/customers/{id}")
     public Optional<Customer> getCustomer(@PathVariable Long id) {
-        return customerService.getCustomer(id);
+        Optional<Customer> customer = customerRepository.findById(id);
+        if (customer.isEmpty()) {
+            System.out.println(" Customer Not found");
+        }
+        return customer;
     }
     @DeleteMapping("/customers/{id}")
     public void deleteCity(@PathVariable Long id) {
+        customerRepository.deleteById(id);
     }
     @DeleteMapping("/customers")
     public void deleteAllCustomer() {
+        customerRepository.deleteAll();
 
     }
 

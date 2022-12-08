@@ -1,3 +1,4 @@
+/*
 package com.example.javaprojectv2.service;
 
 import com.example.javaprojectv2.model.Customer;
@@ -13,13 +14,17 @@ import java.util.Optional;
 
 public class CustomerService {
 
+    @Autowired
+    CustomerRepository customerRepository;
 
+*/
 /*    public Long updateCustomer(Customer customer, Long id){
         Customer referenceById = customerRepository.getReferenceById(id);
         referenceById.setUsername(customer.getUsername());
         Customer save = customerRepository.save(referenceById);
         return save.getId();
-    }*/
+    }*//*
+
     private static List<Customer> loadCustomersFromDb(){
         List<Customer>custObject=new ArrayList<Customer>();
         return custObject;
@@ -71,3 +76,4 @@ public class CustomerService {
         customerRepository.deleteAll();
     }
 }
+*/
