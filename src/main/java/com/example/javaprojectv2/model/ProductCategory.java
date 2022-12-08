@@ -12,7 +12,7 @@ public class ProductCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "id")
     private Long id;
-    @Column(name="product_name")// name olucak
+    @Column(name="name")// name olucak
     private String name;
 
     public long getId() {
