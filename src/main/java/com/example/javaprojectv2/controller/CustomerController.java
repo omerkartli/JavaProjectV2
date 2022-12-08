@@ -15,7 +15,6 @@ public class CustomerController {
     @Autowired
     CustomerRepository customerRepository;
 
-
     @PostMapping("/customers")
     public Customer saveCustomer(@RequestBody Customer customer) {
         return customerRepository.save(customer);
@@ -26,25 +25,21 @@ public class CustomerController {
         customerService.updateCustomer(customer,id);
     }*/
 
-
 /*  @PutMapping("/customers/{id}")
     public Customer mergeCustomer(@RequestBody Customer customer){
 
         return customerRepository.save(customer);
     }*/
-    @PutMapping("/customers")
-    public String updateCustomer(@RequestBody Customer customer) {
-        boolean resourceFound =false;
-        for(Customer currentCustomer:getAllCustomer()){
-            if(currentCustomer.getId()==customer.getId()){
-                resourceFound=true;
-                currentCustomer.setName(customer.getName());
-                currentCustomer.setSurname(customer.getSurname());
-                currentCustomer.setUsername(customer.getUsername());
-                currentCustomer.setPassword(customer.getPassword());
-                currentCustomer.setRole(customer.getRole());
-            }
-            return "Customer Updated Succesfully";
+    @PutMapping("/customers/{id}")
+    public Customer updateCustomer(@RequestBody Customer customer, @PathVariable() Long id) {
+        Optional<Customer> currentCustomer = getCustomer(id);
+        if (currentCustomer.isPresent()) {
+            currentCustomer.get().setName(customer.getName());
+            currentCustomer.get().setSurname(customer.getSurname());
+            currentCustomer.get().setUsername(customer.getUsername());
+            currentCustomer.get().setPassword(customer.getPassword());
+            currentCustomer.get().setRole(customer.getRole());
+            return customerRepository.save(currentCustomer.get());
         }
         return null;
     }
