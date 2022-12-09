@@ -20,15 +20,16 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Customer updateCustomer(Customer customer, Long id) {
+    public Customer updateCustomer(Customer updateCustomer, Long id) {
         Optional<Customer> currentCustomer = getCustomer(id);
         if (currentCustomer.isPresent()) {
-            currentCustomer.get().setName(customer.getName());
-            currentCustomer.get().setSurname(customer.getSurname());
-            currentCustomer.get().setUsername(customer.getUsername());
-            currentCustomer.get().setPassword(customer.getPassword());
-            currentCustomer.get().setRole(customer.getRole());
-            return customerRepository.save(currentCustomer.get());
+            Customer customer = currentCustomer.get();
+            customer.setName(updateCustomer.getName());
+            customer.setSurname(updateCustomer.getSurname());
+            customer.setUsername(updateCustomer.getUsername());
+            customer.setPassword(updateCustomer.getPassword());
+            customer.setRole(updateCustomer.getRole());
+            return customerRepository.save(customer);
         }
         return null;
     }
@@ -46,7 +47,7 @@ public class CustomerService {
         return customer;
     }
 
-    public void deleteCity(Long id) {
+    public void deleteCustomer(Long id) {
         customerRepository.deleteById(id);
     }
 

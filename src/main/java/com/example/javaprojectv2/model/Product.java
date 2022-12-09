@@ -14,12 +14,16 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
-    private String category;  //// Bura foreign key olacak onu OneToMany vs bak M:1
+
+    @ManyToOne
+    @JoinColumn(name="product_category_name")//foreign key
+    private ProductCategory category;
+
     private String name;
     private Double price;
     private String picture;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -27,11 +31,11 @@ public class Product {
         this.id = id;
     }
 
-    public String getCategory() {
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ProductCategory category) {
         this.category = category;
     }
 
@@ -63,7 +67,7 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", category='" + category + '\'' +
+                ", category=" + category +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", picture='" + picture + '\'' +

@@ -36,9 +36,11 @@ public class CustomerController {
         return customerService.getCustomer(id);
     }
     @DeleteMapping("/customers/{id}")
-    public void deleteCity(@PathVariable Long id) {
-        customerService.deleteCity(id);
+    public void deleteCustomer(@PathVariable Long id) {
+        customerService.deleteCustomer(id);
     }
+
+
     @DeleteMapping("/customers")
     public void deleteAllCustomer() {
         customerService.deleteAllCustomer();

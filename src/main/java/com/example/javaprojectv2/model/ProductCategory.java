@@ -12,10 +12,12 @@ public class ProductCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "id")
     private Long id;
-    @Column(name="name")// name olucak
-    private String name;
+    @Column(name="product_category_name")// bu isim foreign key olacak
+    // yerle aynı olmalı
+    private String name;// bunu bu kadar uzatmaya gerek yok
+    // fakat diğer tarafta 2 tane priv name olamsına izin vermiyor.
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
