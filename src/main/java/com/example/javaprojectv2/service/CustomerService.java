@@ -2,6 +2,9 @@ package com.example.javaprojectv2.service;
 
 import com.example.javaprojectv2.model.Customer;
 import com.example.javaprojectv2.repository.CustomerRepository;
+import com.example.javaprojectv2.service.dto.CustomerInputDTO;
+import com.example.javaprojectv2.service.dto.CustomerResultDTO;
+import com.example.javaprojectv2.service.dto.LoginInputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +19,38 @@ public class CustomerService {
     @Autowired
     CustomerRepository customerRepository;
 
-    public Customer saveCustomer(Customer customer) {
-        return customerRepository.save(customer);
+    public CustomerResultDTO saveCustomer(CustomerInputDTO customerInputDTO) {
+        Customer customer=new Customer();
+        customer.setName(customerInputDTO.getName());
+        customer.setSurname(customerInputDTO.getSurname());
+        customer.setUsername(customerInputDTO.getUsername());
+        customer.setPassword(customerInputDTO.getPassword());//maplame
+        customer.setRole("Customer");
+
+        customer = customerRepository.save(customer);
+
+        CustomerResultDTO customerResultDTO=new CustomerResultDTO();
+        customerResultDTO.setId(customer.getId());
+        customerResultDTO.setName(customer.getName());
+        customerResultDTO.setSurname(customer.getSurname());
+        customerResultDTO.setUsername(customer.getUsername());
+        customerResultDTO.setRole(customer.getRole());
+
+        return customerResultDTO;
+    }
+    public CustomerResultDTO loginCustomer(LoginInputDTO loginInputDTO){
+        Optional<Customer> customerControl = customerRepository.findFirstByUsernameAndUserpassword(loginInputDTO.getUsername(), loginInputDTO.getUserpassword());
+        CustomerResultDTO customerResultDTO=new CustomerResultDTO();
+        if (customerControl.isPresent()){
+
+            customerResultDTO.setId(customerControl.get().getId());
+            customerResultDTO.setName(customerControl.get().getName());
+            customerResultDTO.setSurname(customerControl.get().getSurname());
+            customerResultDTO.setUsername(customerControl.get().getUsername());
+            customerResultDTO.setRole(customerControl.get().getRole());
+
+        }
+        return customerResultDTO;
     }
 
     public Customer updateCustomer(Customer updateCustomer, Long id) {

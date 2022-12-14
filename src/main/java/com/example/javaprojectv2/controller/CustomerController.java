@@ -2,6 +2,9 @@ package com.example.javaprojectv2.controller;
 
 import com.example.javaprojectv2.model.Customer;
 import com.example.javaprojectv2.service.CustomerService;
+import com.example.javaprojectv2.service.dto.CustomerInputDTO;
+import com.example.javaprojectv2.service.dto.CustomerResultDTO;
+import com.example.javaprojectv2.service.dto.LoginInputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +20,12 @@ public class CustomerController {
     CustomerService customerService;
 
     @PostMapping("/customers")
-    public Customer saveCustomer(@RequestBody Customer customer) {
-        return customerService.saveCustomer(customer);
+    public CustomerResultDTO saveCustomer(@RequestBody CustomerInputDTO customerInputDTO) {
+        return customerService.saveCustomer(customerInputDTO);
+    }
+    @PostMapping("/customers/login")
+    public CustomerResultDTO loginCustomer(@RequestBody LoginInputDTO loginInputDTO) {
+        return customerService.loginCustomer(loginInputDTO);
     }
     @PutMapping("/customers/{id}")
     public Customer updateCustomer(@RequestBody Customer customer, @PathVariable() Long id) {
