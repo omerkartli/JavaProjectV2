@@ -1,28 +1,28 @@
 package com.example.javaprojectv2.model;
 
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="customer")
 public class Customer {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) ///Auto olabilir bu
     @Column(name= "id")
     private Long id;
 
-    @Column(name= "first_name")
+    @NotNull
     private String name;
-    @Column(name= "last_name")
+    @NotNull
     private String surname;
-    @Column(name= "user_name")
+    @NotNull
     private String username;
-    @Column(name= "password")
+    @NotNull
     private String userpassword;
-    @Column(name= "role")
+    @NotNull
     private String role;
 
     public Long getId() {

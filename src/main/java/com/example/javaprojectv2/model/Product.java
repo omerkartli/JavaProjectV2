@@ -1,26 +1,29 @@
 package com.example.javaprojectv2.model;
 
+import com.sun.istack.NotNull;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="product")
-
+@Table(name = "product")
 
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
     private Long id;
 
+    @NotNull
     @ManyToOne
-    @JoinColumn(name="product_category_name")//foreign key
+    //@JoinColumn(name = "product_category_name")//foreign key
     private ProductCategory category;
 
+    @NotNull
     private String name;
+    @NotNull
     private Double price;
+
     private String picture;
 
     public Long getId() {

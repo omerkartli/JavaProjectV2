@@ -1,6 +1,8 @@
 package com.example.javaprojectv2.model;
 
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,12 +12,10 @@ public class ProductCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "id")
     private Long id;
-    @Column(name="product_category_name")// bu isim foreign key olacak
-    // yerle aynı olmalı
-    private String name;// bunu bu kadar uzatmaya gerek yok
-    // fakat diğer tarafta 2 tane priv name olamsına izin vermiyor.
+
+    @NotNull
+    private String name;
 
     public Long getId() {
         return id;

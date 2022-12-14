@@ -1,23 +1,30 @@
 package com.example.javaprojectv2.model;
 
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name= "sales_order_item")
+@Table(name = "sales_order_item")
 
 public class SalesOrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-    @Column(name = "sales_order")
-    private String salesOrder;
-    @Column(name = "product")
-    private String product;
-    @Column(name = "amount")
+
+    @NotNull
+    @ManyToOne
+    private SalesOrder salesOrder;
+
+    @NotNull
+    @ManyToOne
+    private Product product;
+
+    @NotNull
     private Integer amount;
-    @Column(name = "price")
+
+    @NotNull
     private Double price;
 
     public Long getId() {
@@ -28,19 +35,19 @@ public class SalesOrderItem {
         this.id = id;
     }
 
-    public String getSalesOrder() {
+    public SalesOrder getSalesOrder() {
         return salesOrder;
     }
 
-    public void setSalesOrder(String salesOrder) {
+    public void setSalesOrder(SalesOrder salesOrder) {
         this.salesOrder = salesOrder;
     }
 
-    public String getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(String product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 

@@ -1,5 +1,7 @@
 package com.example.javaprojectv2.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,8 +13,12 @@ public class SalesOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="customer")
-    private String customer;// bu da foreign key olacak m:1
+
+    @NotNull
+    @ManyToOne
+    private Customer customer;
+
+    @NotNull
     private Date date;
 
     public Long getId() {
@@ -23,14 +29,13 @@ public class SalesOrder {
         this.id = id;
     }
 
-    public String getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(String customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-
 
     public Date getDate() {
         return date;
