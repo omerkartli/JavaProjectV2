@@ -7,20 +7,20 @@ import com.example.javaprojectv2.service.dto.CustomerResultDTO;
 import com.example.javaprojectv2.service.dto.LoginInputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+
 public class CustomerService {
 
     @Autowired
     CustomerRepository customerRepository;
 
     public CustomerResultDTO saveCustomer(CustomerInputDTO customerInputDTO) {
-        Customer customer=new Customer();
+        Customer customer = new Customer();
         customer.setName(customerInputDTO.getName());
         customer.setSurname(customerInputDTO.getSurname());
         customer.setUsername(customerInputDTO.getUsername());
@@ -29,7 +29,7 @@ public class CustomerService {
 
         customer = customerRepository.save(customer);
 
-        CustomerResultDTO customerResultDTO=new CustomerResultDTO();
+        CustomerResultDTO customerResultDTO = new CustomerResultDTO();
         customerResultDTO.setId(customer.getId());
         customerResultDTO.setName(customer.getName());
         customerResultDTO.setSurname(customer.getSurname());
@@ -38,10 +38,11 @@ public class CustomerService {
 
         return customerResultDTO;
     }
-    public CustomerResultDTO loginCustomer(LoginInputDTO loginInputDTO){
+
+    public CustomerResultDTO loginCustomer(LoginInputDTO loginInputDTO) {
         Optional<Customer> customerControl = customerRepository.findFirstByUsernameAndUserpassword(loginInputDTO.getUsername(), loginInputDTO.getUserpassword());
-        CustomerResultDTO customerResultDTO=new CustomerResultDTO();
-        if (customerControl.isPresent()){
+        CustomerResultDTO customerResultDTO = new CustomerResultDTO();
+        if (customerControl.isPresent()) {
 
             customerResultDTO.setId(customerControl.get().getId());
             customerResultDTO.setName(customerControl.get().getName());
@@ -53,31 +54,56 @@ public class CustomerService {
         return customerResultDTO;
     }
 
-    public Customer updateCustomer(Customer updateCustomer, Long id) {
-        Optional<Customer> currentCustomer = getCustomer(id);
+    public CustomerResultDTO updateCustomer(CustomerInputDTO updateCustomer, Long id) {
+        Optional<Customer> currentCustomer = customerRepository.findById(id);;
         if (currentCustomer.isPresent()) {
             Customer customer = currentCustomer.get();
+
             customer.setName(updateCustomer.getName());
             customer.setSurname(updateCustomer.getSurname());
             customer.setUsername(updateCustomer.getUsername());
             customer.setPassword(updateCustomer.getPassword());
-            customer.setRole(updateCustomer.getRole());
-            return customerRepository.save(customer);
+
+            customer=customerRepository.save(customer);
+
+            CustomerResultDTO customerResultDTO = new CustomerResultDTO();
+            customerResultDTO.setId(customer.getId());
+            customerResultDTO.setName(customer.getName());
+            customerResultDTO.setSurname(customer.getSurname());
+            customerResultDTO.setUsername(customer.getUsername());
+            customerResultDTO.setRole(customer.getRole());
+
+            return customerResultDTO;
         }
         return null;
     }
 
-    public List<Customer> getAllCustomer() {
-        List<Customer> customers = customerRepository.findAll();
-        return customers;
+    public List<CustomerResultDTO> getAllCustomer() {
+        List<Customer> customerEntityList = customerRepository.findAll();
+        List<CustomerResultDTO> results = new ArrayList<>();
+        customerEntityList.forEach(customer -> {
+            CustomerResultDTO result = new CustomerResultDTO();
+            result.setId(customer.getId());
+            result.setName(customer.getName());
+            result.setSurname(customer.getSurname());
+            result.setUsername(customer.getUsername());
+            result.setRole(customer.getRole());
+            results.add(result);
+        });
+        return results;
     }
 
-    public Optional<Customer> getCustomer(Long id) {
+    public CustomerResultDTO getCustomer(Long id) {
         Optional<Customer> customer = customerRepository.findById(id);
-        if (customer.isEmpty()) {
-            System.out.println(" Customer Not found");
+        CustomerResultDTO result=new CustomerResultDTO();
+        if (customer.isPresent()) {
+            result.setId(customer.get().getId());
+            result.setName(customer.get().getName());
+            result.setSurname(customer.get().getSurname());
+            result.setUsername(customer.get().getUsername());
+            result.setRole(customer.get().getRole());
         }
-        return customer;
+        return result;
     }
 
     public void deleteCustomer(Long id) {

@@ -3,6 +3,8 @@ package com.example.javaprojectv2.controller;
 
 import com.example.javaprojectv2.model.ProductCategory;
 import com.example.javaprojectv2.service.ProductCategoryService;
+import com.example.javaprojectv2.service.dto.ProductCategoryInputDTO;
+import com.example.javaprojectv2.service.dto.ProductCategoryResultDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,21 +19,21 @@ public class ProductCategoryController {
     ProductCategoryService productCategoryService;
 
     @PostMapping("/product-categories")
-    public ProductCategory saveProductCategory(@RequestBody ProductCategory productCategory) {
-        return productCategoryService.saveProductCategory(productCategory);
+    public ProductCategoryResultDTO saveProductCategory(@RequestBody ProductCategoryInputDTO productCategoryInputDTO) {
+        return productCategoryService.saveProductCategory(productCategoryInputDTO);
     }
     @PutMapping("/product-categories/{id}")
-    public ProductCategory updateProductCategory(@RequestBody ProductCategory productCategory, @PathVariable() Long id) {
-        return productCategoryService.updateProductCategory(productCategory, id);
+    public ProductCategoryResultDTO updateProductCategory(@RequestBody ProductCategoryInputDTO productCategoryInputDTO, @PathVariable() Long id) {
+        return productCategoryService.updateProductCategory(productCategoryInputDTO, id);
     }
 
     @GetMapping("/product-categories")
-    public List<ProductCategory> getAllProductCategory() {
+    public List<ProductCategoryResultDTO> getAllProductCategory() {
 
         return productCategoryService.getAllProductCategory();
     }
     @GetMapping("/product-categories/{id}")
-    public Optional<ProductCategory> getProductCategory(@PathVariable Long id) {
+    public ProductCategoryResultDTO getProductCategory(@PathVariable Long id) {
 
         return productCategoryService.getProductCategory(id);
     }

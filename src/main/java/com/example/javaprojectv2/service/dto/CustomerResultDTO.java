@@ -1,7 +1,5 @@
 package com.example.javaprojectv2.service.dto;
 
-import com.sun.istack.NotNull;
-
 public class CustomerResultDTO {
 
     private Long id;

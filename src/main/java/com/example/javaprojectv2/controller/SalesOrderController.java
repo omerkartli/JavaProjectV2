@@ -1,13 +1,13 @@
 package com.example.javaprojectv2.controller;
 
 
-import com.example.javaprojectv2.model.SalesOrder;
 import com.example.javaprojectv2.service.SalesOrderService;
+import com.example.javaprojectv2.service.dto.SalesOrderInputDTO;
+import com.example.javaprojectv2.service.dto.SalesOrderResultDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -17,24 +17,27 @@ public class SalesOrderController {
     SalesOrderService salesOrderService;
 
     @PostMapping("/sales-orders")
-    public SalesOrder saveSalesOrder(@RequestBody SalesOrder salesOrder) {
-        return salesOrderService.saveSalesOrder(salesOrder);
+    public SalesOrderResultDTO saveSalesOrder(@RequestBody SalesOrderInputDTO salesOrderInputDTO) {
+        return salesOrderService.saveSalesOrder(salesOrderInputDTO);
     }
+
     @PutMapping("/sales-orders/{id}")
-    public SalesOrder updateSalesOrder(@RequestBody SalesOrder salesOrder, @PathVariable() Long id) {
-        return salesOrderService.updateSalesOrder(salesOrder, id);
+    public SalesOrderResultDTO updateSalesOrder(@RequestBody SalesOrderInputDTO salesOrderInputDTO, @PathVariable() Long id) {
+        return salesOrderService.updateSalesOrder(salesOrderInputDTO, id);
     }
 
     @GetMapping("/sales-orders")
-    public List<SalesOrder> getAllSalesOrder() {
+    public List<SalesOrderResultDTO> getAllSalesOrder() {
 
         return salesOrderService.getAllSalesOrder();
     }
+
     @GetMapping("/sales-orders/{id}")
-    public Optional<SalesOrder> getSalesOrder(@PathVariable Long id) {
+    public SalesOrderResultDTO getSalesOrder(@PathVariable Long id) {
 
         return salesOrderService.getSalesOrder(id);
     }
+
     @DeleteMapping("/sales-orders/{id}")
     public void deleteProductCategoriy(@PathVariable Long id) {
         salesOrderService.deleteSalesOrder(id);
