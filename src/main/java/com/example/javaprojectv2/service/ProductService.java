@@ -91,12 +91,10 @@ public class ProductService {
             productResultDTO.setPicture(product.getPicture());
 
             ProductCategoryResultDTO productCategoryResultDTO=new ProductCategoryResultDTO();
-
             productCategoryResultDTO.setId(product.getCategory().getId());
             productCategoryResultDTO.setName(product.getCategory().getName());
 
             productResultDTO.setCategoryId(productCategoryResultDTO);
-
             productResultDTOS.add(productResultDTO);
 
         });

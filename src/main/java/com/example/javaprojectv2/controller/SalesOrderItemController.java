@@ -3,6 +3,8 @@ package com.example.javaprojectv2.controller;
 import com.example.javaprojectv2.model.SalesOrderItem;
 import com.example.javaprojectv2.model.SalesOrderItem;
 import com.example.javaprojectv2.service.SalesOrderItemService;
+import com.example.javaprojectv2.service.dto.SalesOrderItemInputDTO;
+import com.example.javaprojectv2.service.dto.SalesOrderItemResultDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,21 +19,21 @@ public class SalesOrderItemController {
     SalesOrderItemService salesOrderItemService;
 
     @PostMapping("/sales-order-items")
-    public SalesOrderItem saveSalesOrderItem(@RequestBody SalesOrderItem productCategory) {
-        return salesOrderItemService.saveSalesOrderItem(productCategory);
+    public SalesOrderItemResultDTO saveSalesOrderItem(@RequestBody SalesOrderItemInputDTO productCategoryInputDTO) {
+        return salesOrderItemService.saveSalesOrderItem(productCategoryInputDTO);
     }
     @PutMapping("/sales-order-items/{id}")
-    public SalesOrderItem updateSalesOrderItem(@RequestBody SalesOrderItem productCategory, @PathVariable() Long id) {
-        return salesOrderItemService.updateSalesOrderItem(productCategory, id);
+    public SalesOrderItemResultDTO updateSalesOrderItem(@RequestBody SalesOrderItemInputDTO productCategoryInputDTO, @PathVariable() Long id) {
+        return salesOrderItemService.updateSalesOrderItem(productCategoryInputDTO, id);
     }
 
     @GetMapping("/sales-order-items")
-    public List<SalesOrderItem> getAllSalesOrderItem() {
+    public List<SalesOrderItemResultDTO> getAllSalesOrderItem() {
 
         return salesOrderItemService.getAllSalesOrderItem();
     }
     @GetMapping("/sales-order-items/{id}")
-    public Optional<SalesOrderItem> getSalesOrderItem(@PathVariable Long id) {
+    public SalesOrderItemResultDTO getSalesOrderItem(@PathVariable Long id) {
 
         return salesOrderItemService.getSalesOrderItem(id);
     }
