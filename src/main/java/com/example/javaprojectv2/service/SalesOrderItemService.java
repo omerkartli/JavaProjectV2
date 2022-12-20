@@ -1,7 +1,6 @@
 package com.example.javaprojectv2.service;
 
 import com.example.javaprojectv2.model.Product;
-import com.example.javaprojectv2.model.ProductCategory;
 import com.example.javaprojectv2.model.SalesOrder;
 import com.example.javaprojectv2.model.SalesOrderItem;
 import com.example.javaprojectv2.repository.SalesOrderItemRepository;
