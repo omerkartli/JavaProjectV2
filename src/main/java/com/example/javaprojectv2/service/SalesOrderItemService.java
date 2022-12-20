@@ -8,11 +8,13 @@ import com.example.javaprojectv2.service.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class SalesOrderItemService {
 
     @Autowired
@@ -40,11 +42,11 @@ public class SalesOrderItemService {
 
         ProductResultDTO productResultDTO = new ProductResultDTO();
         productResultDTO.setId(salesOrderItem.getProduct().getId());
-        salesOrderItemResultDTO.setProductId(productResultDTO);
+        salesOrderItemResultDTO.setProduct(productResultDTO);
 
         SalesOrderResultDTO salesOrderResultDTO = new SalesOrderResultDTO();
         salesOrderResultDTO.setId(salesOrderItem.getSalesOrder().getId());
-        salesOrderItemResultDTO.setSalesOrderId(salesOrderResultDTO);
+        salesOrderItemResultDTO.setSalesOrder(salesOrderResultDTO);
 
         return salesOrderItemResultDTO;
     }
@@ -75,11 +77,11 @@ public class SalesOrderItemService {
 
             ProductResultDTO productResultDTO =new ProductResultDTO();
             productResultDTO.setId(salesOrderItem.getProduct().getId());
-            salesOrderItemResultDTO.setProductId(productResultDTO);
+            salesOrderItemResultDTO.setProduct(productResultDTO);
 
             SalesOrderResultDTO salesOrderResultDTO=new SalesOrderResultDTO();
             salesOrderResultDTO.setId(salesOrderItem.getSalesOrder().getId());
-            salesOrderItemResultDTO.setSalesOrderId(salesOrderResultDTO);
+            salesOrderItemResultDTO.setSalesOrder(salesOrderResultDTO);
 
             return salesOrderItemResultDTO;
         }
@@ -105,8 +107,8 @@ public class SalesOrderItemService {
             productCategoryResultDTO.setId(salesOrderItem.getProduct().getCategory().getId());
             productCategoryResultDTO.setName(salesOrderItem.getProduct().getCategory().getName());
 
-            salesOrderItemResultDTO.setProductId(productResultDTO);
-            productResultDTO.setCategoryId(productCategoryResultDTO);
+            salesOrderItemResultDTO.setProduct(productResultDTO);
+            productResultDTO.setCategory(productCategoryResultDTO);
 
 
 
@@ -121,7 +123,7 @@ public class SalesOrderItemService {
             customerResultDTO.setUsername(salesOrderItem.getSalesOrder().getCustomer().getUsername());
             customerResultDTO.setRole(salesOrderItem.getSalesOrder().getCustomer().getRole());
 
-            salesOrderItemResultDTO.setSalesOrderId(salesOrderResultDTO);
+            salesOrderItemResultDTO.setSalesOrder(salesOrderResultDTO);
             salesOrderResultDTO.setCustomer(customerResultDTO);
             salesOrderItemResultDTOS.add(salesOrderItemResultDTO);
 
@@ -149,8 +151,8 @@ public class SalesOrderItemService {
             productCategoryResultDTO.setId(salesOrdersItem.get().getProduct().getCategory().getId());
             productCategoryResultDTO.setName(salesOrdersItem.get().getProduct().getCategory().getName());
 
-            salesOrderItemResultDTO.setProductId(productResultDTO);
-            productResultDTO.setCategoryId(productCategoryResultDTO);
+            salesOrderItemResultDTO.setProduct(productResultDTO);
+            productResultDTO.setCategory(productCategoryResultDTO);
 
 
 
@@ -165,7 +167,7 @@ public class SalesOrderItemService {
             customerResultDTO.setUsername(salesOrdersItem.get().getSalesOrder().getCustomer().getUsername());
             customerResultDTO.setRole(salesOrdersItem.get().getSalesOrder().getCustomer().getRole());
 
-            salesOrderItemResultDTO.setSalesOrderId(salesOrderResultDTO);
+            salesOrderItemResultDTO.setSalesOrder(salesOrderResultDTO);
             salesOrderResultDTO.setCustomer(customerResultDTO);
 
         }

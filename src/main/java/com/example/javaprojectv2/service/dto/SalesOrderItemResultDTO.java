@@ -4,9 +4,9 @@ public class SalesOrderItemResultDTO {
 
     private Long id;
 
-    private SalesOrderResultDTO salesOrderId;
+    private SalesOrderResultDTO salesOrder;
 
-    private ProductResultDTO productId;
+    private ProductResultDTO product;
 
     private Integer amount;
 
@@ -20,20 +20,20 @@ public class SalesOrderItemResultDTO {
         this.id = id;
     }
 
-    public SalesOrderResultDTO getSalesOrderId() {
-        return salesOrderId;
+    public SalesOrderResultDTO getSalesOrder() {
+        return salesOrder;
     }
 
-    public void setSalesOrderId(SalesOrderResultDTO salesOrderId) {
-        this.salesOrderId = salesOrderId;
+    public void setSalesOrder(SalesOrderResultDTO salesOrder) {
+        this.salesOrder = salesOrder;
     }
 
-    public ProductResultDTO getProductId() {
-        return productId;
+    public ProductResultDTO getProduct() {
+        return product;
     }
 
-    public void setProductId(ProductResultDTO productId) {
-        this.productId = productId;
+    public void setProduct(ProductResultDTO product) {
+        this.product = product;
     }
 
     public Integer getAmount() {
@@ -56,8 +56,8 @@ public class SalesOrderItemResultDTO {
     public String toString() {
         return "SalesOrderItemResultDTO{" +
                 "id=" + id +
-                ", salesOrderId=" + salesOrderId +
-                ", productId=" + productId +
+                ", salesOrder=" + salesOrder +
+                ", product=" + product +
                 ", amount=" + amount +
                 ", price=" + price +
                 '}';

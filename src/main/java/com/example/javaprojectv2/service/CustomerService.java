@@ -50,8 +50,9 @@ public class CustomerService {
             customerResultDTO.setUsername(customerControl.get().getUsername());
             customerResultDTO.setRole(customerControl.get().getRole());
 
+            return customerResultDTO;
         }
-        return customerResultDTO;
+        return null;
     }
 
     public CustomerResultDTO updateCustomer(CustomerInputDTO updateCustomer, Long id) {

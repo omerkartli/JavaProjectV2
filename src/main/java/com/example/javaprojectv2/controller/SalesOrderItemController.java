@@ -19,8 +19,8 @@ public class SalesOrderItemController {
     SalesOrderItemService salesOrderItemService;
 
     @PostMapping("/sales-order-items")
-    public SalesOrderItemResultDTO saveSalesOrderItem(@RequestBody SalesOrderItemInputDTO productCategoryInputDTO) {
-        return salesOrderItemService.saveSalesOrderItem(productCategoryInputDTO);
+    public SalesOrderItemResultDTO saveSalesOrderItem(@RequestBody SalesOrderItemInputDTO salesOrderItemInputDTO) {
+        return salesOrderItemService.saveSalesOrderItem(salesOrderItemInputDTO);
     }
     @PutMapping("/sales-order-items/{id}")
     public SalesOrderItemResultDTO updateSalesOrderItem(@RequestBody SalesOrderItemInputDTO productCategoryInputDTO, @PathVariable() Long id) {

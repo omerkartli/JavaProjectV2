@@ -44,7 +44,7 @@ public class ProductService {
 
         ProductCategoryResultDTO productCategoryResultDTO=new ProductCategoryResultDTO();
         productCategoryResultDTO.setId(product.getCategory().getId());
-        productResultDTO.setCategoryId(productCategoryResultDTO);
+        productResultDTO.setCategory(productCategoryResultDTO);
 
         return productResultDTO;
     }
@@ -73,7 +73,7 @@ public class ProductService {
 
             ProductCategoryResultDTO productCategoryResultDTO=new ProductCategoryResultDTO();
             productCategoryResultDTO.setId(product.getCategory().getId());
-            productResultDTO.setCategoryId(productCategoryResultDTO);
+            productResultDTO.setCategory(productCategoryResultDTO);
 
             return productResultDTO;
         }
@@ -94,7 +94,7 @@ public class ProductService {
             productCategoryResultDTO.setId(product.getCategory().getId());
             productCategoryResultDTO.setName(product.getCategory().getName());
 
-            productResultDTO.setCategoryId(productCategoryResultDTO);
+            productResultDTO.setCategory(productCategoryResultDTO);
             productResultDTOS.add(productResultDTO);
 
         });
@@ -118,7 +118,7 @@ public class ProductService {
             productCategoryResultDTO.setId(product.get().getCategory().getId());
             productCategoryResultDTO.setName(product.get().getCategory().getName());
 
-            productResultDTO.setCategoryId(productCategoryResultDTO);
+            productResultDTO.setCategory(productCategoryResultDTO);
 
         }
         return productResultDTO;

@@ -1,12 +1,10 @@
 package com.example.javaprojectv2.service.dto;
 
-import com.example.javaprojectv2.model.ProductCategory;
-
 public class ProductResultDTO {
 
     private Long id;
 
-    private ProductCategoryResultDTO categoryId;
+    private ProductCategoryResultDTO category;
 
     private String name;
 
@@ -22,12 +20,12 @@ public class ProductResultDTO {
         this.id = id;
     }
 
-    public ProductCategoryResultDTO getCategoryId() {
-        return categoryId;
+    public ProductCategoryResultDTO getCategory() {
+        return category;
     }
 
-    public void setCategoryId(ProductCategoryResultDTO categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(ProductCategoryResultDTO category) {
+        this.category = category;
     }
 
     public String getName() {
@@ -58,7 +56,7 @@ public class ProductResultDTO {
     public String toString() {
         return "ProductResultDTO{" +
                 "id=" + id +
-                ", categoryId=" + categoryId +
+                ", categoryId=" + category +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", picture='" + picture + '\'' +
